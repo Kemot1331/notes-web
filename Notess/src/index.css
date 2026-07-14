@@ -1,0 +1,36 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.app-container{
+  display: flex;
+  min-height: 100vh;
+}
+.side-bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  width: 10vh;
+  border-right: 0.1px solid #eef0f2;
+}
+.logo{
+  margin-bottom: 10px;
+  margin: 1.5vh;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 5vh;
+}
+.add-btn{
+  width: 45px;
+  height: 45px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 3vh;
+  font-weight: lighter;
+  border: 0;
+}
