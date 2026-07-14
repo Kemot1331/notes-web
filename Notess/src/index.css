@@ -25,8 +25,8 @@ body{
   margin-bottom: 5vh;
 }
 .add-btn{
-  width: 45px;
-  height: 45px;
+  width: 5vh;
+  height: 5vh;
   background-color: #1a1a1a;
   color: #fff;
   cursor: pointer;
