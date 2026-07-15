@@ -1,0 +1,19 @@
+.search-bar-container{
+  width: 100%;
+}
+.search-input{
+  margin: 2.5vh;
+  margin-left: 6vh;
+  border: none;
+  padding: 0.7vh;
+  color: #5c5959;
+}
+.search-input:focus{
+  outline: solid;
+  outline-width: 0.1px;
+  outline-color: #eef0f2;
+}
+.search-input::placeholder{
+  font-family: 'DM Sans', sans-serif;
+  color: #a0a0a0
+}

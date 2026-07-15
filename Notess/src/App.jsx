@@ -1,3 +1,5 @@
+import SearchBar from "./components/SearchBar";
+import Sidebar from "./components/Sidebar";
 
 function App(){
 const dummyNotes = [
@@ -10,21 +12,9 @@ const dummyNotes = [
 
   return(
     <div className="app-container">
-      <div className="side-bar">
-        <div className="logo">Notess</div>
-        <button className="add-btn">+</button>
-        <div className="color-dots">
-          <span className="dot" style={{ backgroundColor: '#ffb3ba' }}></span>
-          <span className="dot" style={{ backgroundColor: '#ffdfba' }}></span>
-          <span className="dot" style={{ backgroundColor: '#ffffba' }}></span>
-          <span className="dot" style={{ backgroundColor: '#baffc9' }}></span>
-          <span className="dot" style={{ backgroundColor: '#bae1ff' }}></span>
-        </div>
-      </div>
+     <Sidebar />
       <main>
-        <div className="search-bar-container">
-          <input type="text" className="search-input" placeholder={'\ud83d\udd0e\ufe0e Search'}/>
-        </div>
+        <SearchBar />
         <div className="main-title"><h1>Notes</h1></div>
       </main>
     </div>

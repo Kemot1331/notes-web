@@ -1,0 +1,39 @@
+.side-bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  width: 10vh;
+  border-right: 0.1px solid #eef0f2;
+}
+.logo{
+  margin-bottom: 10px;
+  margin: 2.5vh;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5vh;
+}
+.add-btn{
+  width: 5vh;
+  height: 5vh;
+  background-color: #1a1a1a;
+  color: #d4d0d0;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 3vh;
+  font-weight: lighter;
+  border: 0;
+  margin-bottom: 20px;
+}
+.color-dots{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.dot{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
