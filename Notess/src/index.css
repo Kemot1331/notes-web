@@ -47,3 +47,16 @@ body{
   border-radius: 50%;
   cursor: pointer;
 }
+.search-bar-container{
+  width: 100%;
+}
+.search-bar-container > input[type=text]{
+  margin: 2.5vh;
+  margin-left: 6vh;
+  border: none;
+}
+.search-bar-container > input[type=text]:focus{
+  outline: solid;
+  outline-width: 0.1px;
+  outline-color: #eef0f2;
+}

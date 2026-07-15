@@ -21,6 +21,9 @@ const dummyNotes = [
           <span className="dot" style={{ backgroundColor: '#bae1ff' }}></span>
         </div>
       </div>
+      <div className="search-bar-container">
+        <input type="text" placeholder="Search"/>
+      </div>
     </div>
   )
 }
