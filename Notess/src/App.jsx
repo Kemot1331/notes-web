@@ -21,9 +21,12 @@ const dummyNotes = [
           <span className="dot" style={{ backgroundColor: '#bae1ff' }}></span>
         </div>
       </div>
-      <div className="search-bar-container">
-        <input type="text" className="search-input" placeholder={'\ud83d\udd0e\ufe0e Search'}/>
-      </div>
+      <main>
+        <div className="search-bar-container">
+          <input type="text" className="search-input" placeholder={'\ud83d\udd0e\ufe0e Search'}/>
+        </div>
+        <div className="main-title"><h1>Notes</h1></div>
+      </main>
     </div>
   )
 }

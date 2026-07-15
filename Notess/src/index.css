@@ -3,11 +3,12 @@
 }
 body{
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Google Sans";
 }
 .app-container{
   display: flex;
   min-height: 100vh;
+  flex-direction: row;
 }
 .side-bar{
   display: flex;
@@ -21,6 +22,7 @@ body{
   margin-bottom: 10px;
   margin: 2.5vh;
   text-align: center;
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 5vh;
 }
@@ -63,6 +65,16 @@ body{
   outline-color: #eef0f2;
 }
 .search-input::placeholder{
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   color: #a0a0a0
+}
+main{
+  width: 100%;
+}
+.main-title{
+  letter-spacing: 0.5px;
+}
+.main-title > h1{
+  font-size: 40px;
+  margin-left: 6.1vh;
 }
