@@ -1,10 +1,14 @@
+import Button from './Button';
 import './Sidebar.css';
 
 export default function Sidebar(){
     return (
-         <div className="side-bar">
+        <div className="side-bar">
         <div className="logo">Notess</div>
-        <button className="add-btn">+</button>
+        <Button 
+          content={"+"}
+          size={"5vh"}
+        />
         <div className="color-dots">
           <span className="dot" style={{ backgroundColor: '#ffb3ba' }}></span>
           <span className="dot" style={{ backgroundColor: '#ffdfba' }}></span>
