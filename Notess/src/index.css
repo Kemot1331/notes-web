@@ -50,13 +50,19 @@ body{
 .search-bar-container{
   width: 100%;
 }
-.search-bar-container > input[type=text]{
+.search-input{
   margin: 2.5vh;
   margin-left: 6vh;
   border: none;
+  padding: 0.7vh;
+  color: #5c5959;
 }
-.search-bar-container > input[type=text]:focus{
+.search-input:focus{
   outline: solid;
   outline-width: 0.1px;
   outline-color: #eef0f2;
+}
+.search-input::placeholder{
+  font-family: 'Segoe UI', sans-serif;
+  color: #a0a0a0
 }
