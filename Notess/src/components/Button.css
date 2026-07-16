@@ -8,5 +8,8 @@
   font-size: 3vh;
   font-weight: lighter;
   border: 0;
-  margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

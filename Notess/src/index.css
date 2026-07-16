@@ -19,5 +19,8 @@ main{
 }
 .main-title > h1{
   font-size: 40px;
-  margin-left: 6.1vh;
+  margin-left: 6.3vh;
+}
+.notes-grid{
+  margin-left: 6vh;
 }
