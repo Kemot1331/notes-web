@@ -1,8 +1,9 @@
 import Button from './Button';
+import "./NoteCard.css";
 
 export default function NoteCard(){
     return(
-        <div className="note-container">
+        <div className="note-card">
             <div className="note-title">
                 <p>Tymczasowy tytuł notatki</p>
             </div>
