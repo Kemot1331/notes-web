@@ -1,3 +1,4 @@
+import NoteCard from "./components/NoteCard";
 import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/Sidebar";
 
@@ -16,6 +17,9 @@ const dummyNotes = [
       <main>
         <SearchBar />
         <div className="main-title"><h1>Notes</h1></div>
+        <div className="notes-grid">
+          <NoteCard />
+        </div>
       </main>
     </div>
   )
