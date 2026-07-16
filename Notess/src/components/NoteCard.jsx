@@ -32,18 +32,20 @@ const StarIcon = () => (
   </svg>
 );
 
-export default function NoteCard(){
+export default function NoteCard({title, color, isPinned, date}){
     return(
-        <div className="note-card">
+        <div className="note-card" style={{backgroundColor: color}}>
             <div className="note-top-container">
-                <p className="note-title">Tymczasowy tytuł notatki</p>
-                <Button 
-                    content={<StarIcon />}
-                    size={"4vh"}
-                />
+                <p className="note-title">{title}</p>
+                {isPinned && (
+                    <Button 
+                        content={<StarIcon />}
+                        size={"4vh"}
+                    />
+                )}
             </div>
             <div className="note-footer">
-                <span className="note-date">21 may 2022</span>
+                <span className="note-date">{date || "No date"}</span>
                 <Button
                     content={<PencilIcon />}
                     size={"5vh"}
