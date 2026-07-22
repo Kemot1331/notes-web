@@ -18,18 +18,39 @@ const PencilIcon = () => (
   </svg>
 );
 
-const StarIcon = () => (
+const TrashIcon = () => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     viewBox="0 0 24 24" 
-    fill="#ffd700"
-    stroke="#ffd700" 
-    strokeWidth="1.5" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2.5" 
     strokeLinecap="round" 
     strokeLinejoin="round" 
-    style={{ width: "60%", height: "60%" }}
+    style={{ width: "50%", height: "50%" }}
   >
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    <path d="M3 6h18" />
+    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+    <path d="M8 6V4c0 1 1-2 2-2h4c1 0 2 1 2 2v2" />
+    <line x1="10" y1="11" x2="10" y2="17" />
+    <line x1="14" y1="11" x2="14" y2="17" />
+  </svg>
+);
+
+const PinIcon = () => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2.5" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    style={{ width: "50%", height: "50%" }}
+  >
+    <path d="M12 17v5" />
+    <path d="M9 4h6" />
+    <path d="M15 4v6.5l2 3.5H7l2-3.5V4" />
   </svg>
 );
 
@@ -40,12 +61,6 @@ export default function NoteCard({title, color, isPinned, date}){
         <div className="note-card" style={{backgroundColor: color}}>
             <div className="note-top-container">
                 <p className="note-title">{title}</p>
-                {isPinned && (
-                    <Button 
-                        content={<StarIcon />}
-                        size={"4vh"}
-                    />
-                )}
             </div>
             <div className="note-footer">
                 <span className="note-date">{date || "No date"}</span>
@@ -53,11 +68,11 @@ export default function NoteCard({title, color, isPinned, date}){
                 {isMenuOpen && <div className="note-actions-wrapper">
                     <div className='action-menu'>
                         <Button 
-                            content={"del"}
+                            content={<TrashIcon />}
                             size={"5vh"}
                         />
                         <Button 
-                            content={"pin"}
+                            content={<PinIcon />}
                             size={"5vh"}
                         />
                     </div>
