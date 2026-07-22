@@ -1,5 +1,6 @@
 import Button from './Button';
 import "./NoteCard.css";
+import { use, useState } from 'react';
 
 const PencilIcon = () => (
 <svg 
@@ -33,6 +34,8 @@ const StarIcon = () => (
 );
 
 export default function NoteCard({title, color, isPinned, date}){
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return(
         <div className="note-card" style={{backgroundColor: color}}>
             <div className="note-top-container">
@@ -46,10 +49,30 @@ export default function NoteCard({title, color, isPinned, date}){
             </div>
             <div className="note-footer">
                 <span className="note-date">{date || "No date"}</span>
+
+                {isMenuOpen && <div className="note-actions-wrapper">
+                    <div className='action-menu'>
+                        <Button 
+                            content={"del"}
+                            size={"5vh"}
+                        />
+                        <Button 
+                            content={"pin"}
+                            size={"5vh"}
+                        />
+                    </div>
+                </div>
+                }
+
                 <Button
                     content={<PencilIcon />}
                     size={"5vh"}
+                    onClick={() => {
+                        setIsMenuOpen(!isMenuOpen);
+                    }}
                 />
+
+                
             </div>
         </div>
     );
