@@ -8,6 +8,19 @@ const ColorDotButton = ({color, onClick}) => (
 
 export default function Sidebar(){
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
+    const [showColorDots, setShowColorDots] = useState(false);
+
+    const toogleAddMenu = () => {
+      if(isAddMenuOpen){
+        setIsAddMenuOpen(false);
+        setTimeout(() => {
+          setShowColorDots(false);
+        }, 450);
+      } else{
+        setShowColorDots(true);
+        setIsAddMenuOpen(true);
+      }
+    };
 
     return (
         <div className="side-bar">
@@ -15,12 +28,10 @@ export default function Sidebar(){
         <Button 
           content={"+"}
           size={"5vh"}
-          onClick={() => {
-            setIsAddMenuOpen(!isAddMenuOpen);
-          }}
+          onClick={toogleAddMenu}
         />
-        {isAddMenuOpen &&
-          <div className="color-dots">
+        {showColorDots &&
+          <div className={`color-dots ${isAddMenuOpen ? "dots-opening" : "dots-closing"}`}>
             <ColorDotButton 
               color={"#ffb3ba"}
             />
