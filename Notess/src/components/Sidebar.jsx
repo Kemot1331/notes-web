@@ -1,10 +1,7 @@
 import Button from './Button';
 import './Sidebar.css';
 import { use, useState } from 'react';
-
-const ColorDotButton = ({color, onClick}) => (
-  <button className='dot' style={{backgroundColor: color}} onClick={onClick}></button>
-);
+import ColorDotButton from './ColorDotButton';
 
 export default function Sidebar(){
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
