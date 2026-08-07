@@ -22,10 +22,10 @@ main{
   margin-left: 6.3vh;
 }
 .notes-grid{
-  margin-left: 6vh;
+  margin-left: 3vw;
   display: flex;
   flex-direction: row;
   justify-content: start;
-  gap: 3.5vh;
+  gap: 1.5vw;
   flex-wrap: wrap;
 }

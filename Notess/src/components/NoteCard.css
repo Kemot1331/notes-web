@@ -26,12 +26,6 @@
     width: 100%;
     margin-bottom: 15px;
 }
-.note-footer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
 .note-date{
     font-size: 14px;
     color: #555;

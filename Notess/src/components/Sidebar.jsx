@@ -1,13 +1,13 @@
 import Button from './Button';
 import './Sidebar.css';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import ColorDotButton from './ColorDotButton';
 
 export default function Sidebar(){
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
     const [showColorDots, setShowColorDots] = useState(false);
 
-    const toogleAddMenu = () => {
+    const toggleAddMenu = () => {
       if(isAddMenuOpen){
         setIsAddMenuOpen(false);
         setTimeout(() => {
@@ -25,7 +25,7 @@ export default function Sidebar(){
         <Button 
           content={"+"}
           size={"5vh"}
-          onClick={toogleAddMenu}
+          onClick={toggleAddMenu}
         />
         {showColorDots &&
           <div className={`color-dots ${isAddMenuOpen ? "dots-opening" : "dots-closing"}`}>

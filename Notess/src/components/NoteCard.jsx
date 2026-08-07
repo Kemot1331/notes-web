@@ -1,6 +1,6 @@
 import Button from './Button';
 import "./NoteCard.css";
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 const PencilIcon = () => (
 <svg 
