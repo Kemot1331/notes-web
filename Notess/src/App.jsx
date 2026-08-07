@@ -5,11 +5,11 @@ import Sidebar from "./components/Sidebar";
 
 function App(){
 const dummyNotes = [
-    { id: 1, title: 'This is Docket note.', content: "Tymczasowa treść notatki...", color: '#ffb3ba', date: 'May 22, 2022', isPinned: false},
-    { id: 2, title: 'The beginning of screenless design: UI jobs to be taken over by Solution Architect', content: "Tymczasowa treść notatki...", color: '#ffdfba', date: 'May 21, 2020', isPinned: true },
-    { id: 3, title: '13 Things You Should Give Up If You Want To Be a Successful UX Designer', content: "Tymczasowa treść notatki...", color: '#ffffba', date: 'May 25, 2020', isPinned: false },
-    { id: 4, title: '10 UI & UX Lessons from Designing My Own Product', content: "Tymczasowa treść notatki...", color: '#baffc9', date: 'May 22, 2022', isPinned: true },
-    { id: 5, title: '52 Research Terms you need to know as a UX Designer', content: "Tymczasowa treść notatki...", color: '#bae1ff', isPinned: true},
+    { id: 1, title: 'This is Docket note.', description: "Tymczasowa treść notatki...", color: '#ffb3ba', date: 'May 22, 2022', isPinned: false},
+    { id: 2, title: 'The beginning of screenless design: UI jobs to be taken over by Solution Architect', description: "Tymczasowa treść notatki...", color: '#ffdfba', date: 'May 21, 2020', isPinned: true },
+    { id: 3, title: '13 Things You Should Give Up If You Want To Be a Successful UX Designer', description: "Tymczasowa treść notatki...", color: '#ffffba', date: 'May 25, 2020', isPinned: false },
+    { id: 4, title: '10 UI & UX Lessons from Designing My Own Product', description: "Tymczasowa treść notatki...", color: '#baffc9', date: 'May 22, 2022', isPinned: true },
+    { id: 5, title: '52 Research Terms you need to know as a UX Designer', description: "Tymczasowa treść notatki...", color: '#bae1ff', isPinned: true},
   ];
 
   const [notes, setNotes] = useState(dummyNotes);
