@@ -2,6 +2,7 @@ import { useState } from 'react';
 import NoteCard from "./components/NoteCard";
 import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/Sidebar";
+import AddNoteModal from './components/AddNoteModal';
 
 function App(){
 const dummyNotes = [
@@ -13,6 +14,7 @@ const dummyNotes = [
   ];
 
   const [notes, setNotes] = useState(dummyNotes);
+  const [isModalOpen, setModalOpen] = useState(true);
 
   return(
     <div className="app-container">
@@ -32,6 +34,7 @@ const dummyNotes = [
           ))}
         </div>
       </main>
+      <AddNoteModal isOpen={isModalOpen}/>
     </div>
   )
 }
