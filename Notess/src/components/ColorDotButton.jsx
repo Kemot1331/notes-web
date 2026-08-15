@@ -1,7 +1,7 @@
 import './ColorDotButton.css';
 
-export default function ColorDotButton({color, onClick}){
+export default function ColorDotButton({color, onClick, style}){
     return(
-        <button className='dot' style={{backgroundColor: color}} onClick={onClick}></button>
+        <button className='dot' style={{...style, backgroundColor: color}} onClick={onClick}></button>
     );
 }

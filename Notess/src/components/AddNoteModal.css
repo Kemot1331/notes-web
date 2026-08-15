@@ -1,9 +1,95 @@
 .modal-overlay{
-    height: 100vh;
-    width: 100vw;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    inset: 0;
+    background-color: rgba(26, 26, 26, 0.35);
 }
 .modal-content{
-    height: 20vh;
-    width: 20vw;
-    border: 1px solid black;
+    height: 80vh;
+    width: min(420px, 90vw);
+    border-radius: 24px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    background-color: #ffb3ba;
+}
+.title-container{
+    width: 100%;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.title-container > input[type=text]{
+    width: 80vw;
+    height: 9vh;
+    font-family: inherit;
+    border: none;
+    font-size: 20px;
+    font-weight: 300;
+    color: #1a1a1a;
+    background-color: transparent;
+}
+.title-container > input[type=text]:focus{
+    outline: none;
+}
+.title-container > input[type=text]::placeholder{
+    color: rgba(51, 51, 51, 0.45);
+}
+.description-container{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.description-container > textarea{
+    font-family: inherit;
+    width: 100%;
+    padding: 1%;
+    background-color: transparent;
+    font-size: 14px;
+    color: #333;
+    border: none;
+    resize: none;
+    scrollbar-color: rgba(0, 0, 0, 0.4) transparent;
+}
+.description-container > textarea::placeholder{
+    color: rgba(51, 51, 51, 0.45);
+}
+.description-container > textarea:focus{
+    outline: none;
+}
+.color-dots-picker{
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    gap: 10px;
+}
+.add-note-modal-button{
+    border: none;
+    padding: 16px;
+    font-size: 18px;
+    background-color: #1a1a1a;
+    color: #d4d0d0;
+    cursor: pointer;
+    font-weight: lighter;
+    text-align: center;
+    border-radius: 13%;
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.15s ease;
+}
+.bottom-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5vh; 
+}
+.add-note-modal-button:hover{
+    transform: scale(1.06);
+    background-color: #2a2a2a;
 }
