@@ -29,7 +29,7 @@ export default function AddNoteModal({ isOpen,  onClose}){
                             color={color}
                             onClick={() => setSelectedColor(color)}
                             style={{
-                                border : selectedColor === color ? '2px solid black' : 'none',
+                                border : selectedColor === color ? '1px solid black' : 'none',
                                 height: '25px',
                                 width: '25px'
                             }}
