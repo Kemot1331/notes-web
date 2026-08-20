@@ -15,26 +15,34 @@ export default function AddNoteModal({ isOpen,  onClose}){
 
     return(
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ backgroundColor: selectedColor }}>
                 <div className="title-container">
                     <input type="text" placeholder="Title of your note..." autoFocus/>
                 </div>
                 <div className="description-container">
-                    <textarea name="" id="" placeholder="Take a note..." rows={23}></textarea>
+                    <textarea name="" id="" placeholder="Take a note..." rows={10}></textarea>
                 </div>
-                <div className="color-dots-picker">
-                    {colors.map((color) => (
-                        <ColorDotButton 
-                            key={color}
-                            color={color}
-                            onClick={() => setSelectedColor(color)}
-                            style={{
-                                border : selectedColor === color ? '1px solid black' : 'none',
-                                height: '25px',
-                                width: '25px'
-                            }}
-                        />
-                    ))}                  
+                <div className="switch-buttons-container">
+                    <div className="color-dots-picker">
+                        {colors.map((color) => (
+                            <ColorDotButton 
+                                key={color}
+                                color={color}
+                                onClick={() => setSelectedColor(color)}
+                                style={{
+                                    border : selectedColor === color ? '1px solid black' : 'none',
+                                    height: '25px',
+                                    width: '25px'
+                                }}
+                            />
+                        ))}          
+                    </div>
+                    <div className="switch-container">
+                        <label className="switch">
+                            <input type="checkbox"></input>
+                            <span className="slider round"></span>
+                        </label>
+                    </div>   
                 </div>
                 <div className="bottom-buttons">
                     <AddNoteModalButton>Cancel</AddNoteModalButton>
