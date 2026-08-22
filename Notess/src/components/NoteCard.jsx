@@ -54,7 +54,7 @@ const PinIcon = () => (
   </svg>
 );
 
-export default function NoteCard({title, color, isPinned, date}){
+export default function NoteCard({title, description, color, isPinned, date}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return(
@@ -62,6 +62,7 @@ export default function NoteCard({title, color, isPinned, date}){
             <div className="note-top-container">
                 <p className="note-title">{title}</p>
             </div>
+            {description && <p className="note-description">{description}</p>}
             <div className="note-footer">
                 <span className="note-date">{date || "No date"}</span>
 

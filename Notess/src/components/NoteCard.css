@@ -16,6 +16,17 @@
     color: #1a1a1a;
     width: 80%;
 }
+.note-description{
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 0;
+    color: #333;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
 .note-top-container{
     width: 100%;
     margin-bottom: 15px;

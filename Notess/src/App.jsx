@@ -22,6 +22,19 @@ const dummyNotes = [
     setModalOpen(true);
   }
 
+  const handleAddNote = ({title, description, color, isPinned}) => {
+    const newNote = {
+      id: Date.now(),
+      title,
+      description,
+      color,
+      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric'}),
+      isPinned,
+    };
+    setNotes((prevNotes) => [newNote, ...prevNotes]);
+    setModalOpen(false);
+  }
+
   return(
     <div className="app-container">
      <Sidebar onColorSelect={handleColorSelect}/>
@@ -44,6 +57,7 @@ const dummyNotes = [
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
         initialColor={selectedColor}
+        onSave={handleAddNote}
       />
     </div>
   )
