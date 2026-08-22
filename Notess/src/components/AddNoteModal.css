@@ -10,7 +10,8 @@
     background-color: rgba(26, 26, 26, 0.35);
 }
 .modal-content{
-    height: 54vh;
+    height: auto;
+    max-height: (600px, 90vh);
     width: min(420px, 90vw);
     border-radius: 24px;
     padding: 25px;
@@ -70,12 +71,14 @@
     display: flex;
     justify-content: space-between;
     margin-top: 3vh;
+    flex-wrap: wrap;
 }
 .color-dots-picker{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 .add-note-modal-button{
     border: none;
@@ -92,7 +95,8 @@
 .bottom-buttons{
     display: flex;
     justify-content: space-between;
-    margin-top: 4vh; 
+    margin-top: 4vh;
+    flex-wrap: wrap;
 }
 .add-note-modal-button:hover{
     transform: scale(1.06);
