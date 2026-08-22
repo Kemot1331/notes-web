@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './AddNoteModal.css';
 import ColorDotButton from './ColorDotButton';
 import { useState } from 'react';
@@ -7,8 +7,15 @@ const AddNoteModalButton = ({ children }) => (
     <button className="add-note-modal-button">{children}</button>
 );
 
-export default function AddNoteModal({ isOpen,  onClose}){
-    const [selectedColor, setSelectedColor] = useState("#ffb3ba");
+export default function AddNoteModal({ isOpen,  onClose, initialColor }){
+    const [selectedColor, setSelectedColor] = useState(initialColor || "#ffb3ba");
+
+    useEffect(() => {
+        if(isOpen){
+            setSelectedColor(initialColor || "#ffb3ba");
+        }
+    }, [isOpen, initialColor]);
+
     if(!isOpen) return null;
 
     const colors = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];

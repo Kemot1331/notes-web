@@ -3,9 +3,11 @@ import './Sidebar.css';
 import { useState } from 'react';
 import ColorDotButton from './ColorDotButton';
 
-export default function Sidebar(){
+export default function Sidebar({ onColorSelect }){
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
     const [showColorDots, setShowColorDots] = useState(false);
+
+    const colors = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
 
     const toggleAddMenu = () => {
       if(isAddMenuOpen){
@@ -19,6 +21,13 @@ export default function Sidebar(){
       }
     };
 
+    const handleColorPick = (color) => {
+      onColorSelect(color);
+      if(isAddMenuOpen){
+        toggleAddMenu();
+      }
+    };
+
     return (
         <div className="side-bar">
         <div className="logo">Notess</div>
@@ -29,7 +38,7 @@ export default function Sidebar(){
         />
         {showColorDots &&
           <div className={`color-dots ${isAddMenuOpen ? "dots-opening" : "dots-closing"}`}>
-            <ColorDotButton 
+            {/* <ColorDotButton 
               color={"#ffb3ba"}
             />
             <ColorDotButton 
@@ -43,7 +52,10 @@ export default function Sidebar(){
             />
             <ColorDotButton 
               color={"#bae1ff"}
-            />
+            /> */}
+            {colors.map((color) => (
+              <ColorDotButton color={color} onClick={() => handleColorPick(color)}/>
+            ))}
           </div>
         }
       </div>

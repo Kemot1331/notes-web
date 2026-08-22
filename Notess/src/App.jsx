@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import NoteCard from "./components/NoteCard";
 import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/Sidebar";
@@ -14,11 +14,17 @@ const dummyNotes = [
   ];
 
   const [notes, setNotes] = useState(dummyNotes);
-  const [isModalOpen, setModalOpen] = useState(true);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState("#ffb3ba");
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    setModalOpen(true);
+  }
 
   return(
     <div className="app-container">
-     <Sidebar />
+     <Sidebar onColorSelect={handleColorSelect}/>
       <main>
         <SearchBar />
         <div className="main-title"><h1>Notes</h1></div>
@@ -34,7 +40,11 @@ const dummyNotes = [
           ))}
         </div>
       </main>
-      <AddNoteModal isOpen={isModalOpen}/>
+      <AddNoteModal 
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        initialColor={selectedColor}
+      />
     </div>
   )
 }
