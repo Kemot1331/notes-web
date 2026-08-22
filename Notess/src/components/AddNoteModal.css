@@ -190,3 +190,9 @@ input:checked + .slider:before {
 .modal-content.closing {
   animation: modalPopOut 0.2s ease-in forwards;
 }
+.no-title-error{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: rgb(182, 37, 37);
+}

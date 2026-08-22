@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import './AddNoteModal.css';
 import ColorDotButton from './ColorDotButton';
- 
-const AddNoteModalButton = ({ children, onClick, disabled }) => (
-    <button className="add-note-modal-button" onClick={onClick} disabled={disabled}>{children}</button>
+
+const AddNoteModalButton = ({ children, onClick }) => (
+    <button className="add-note-modal-button" onClick={onClick}>{children}</button>
 );
- 
+
 const CLOSE_ANIMATION_MS = 200;
- 
+
 export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
     const [shouldRender, setShouldRender] = useState(isOpen);
     const [isClosing, setIsClosing] = useState(false);
@@ -15,8 +15,8 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [isPinned, setIsPinned] = useState(false);
+    const [titleBlankError, setTitleBlankError] = useState(false);
     const mouseDownOnOverlay = useRef(false);
- 
 
     useEffect(() => {
         if (isOpen) {
@@ -26,6 +26,7 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
             setTitle('');
             setDescription('');
             setIsPinned(false);
+            setTitleBlankError(false);
         } else if (shouldRender) {
             setIsClosing(true);
             const timeout = setTimeout(() => {
@@ -37,20 +38,28 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
     }, [isOpen, initialColor]);
 
     useEffect(() => {
-        if(!isOpen) return;
+        if (!isOpen) return;
         const handleKeyDown = (e) => {
-            if(e.key === 'Escape') onClose();
+            if (e.key === 'Escape') onClose();
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isOpen, onClose]);
- 
+
     if (!shouldRender) return null;
- 
+
     const colors = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
- 
+
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+        if (titleBlankError) setTitleBlankError(false);
+    };
+
     const handleSave = () => {
-        if (!title.trim()) return;
+        if (!title.trim()) {
+            setTitleBlankError(true);
+            return;
+        }
         onSave({
             title: title.trim(),
             description: description.trim(),
@@ -58,17 +67,18 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
             isPinned,
         });
     };
+
     const handleOverlayMouseDown = (e) => {
         mouseDownOnOverlay.current = e.target === e.currentTarget;
     };
- 
+
     const handleOverlayMouseUp = (e) => {
         if (mouseDownOnOverlay.current && e.target === e.currentTarget) {
             onClose();
         }
         mouseDownOnOverlay.current = false;
     };
- 
+
     return(
         <div
             className={`modal-overlay ${isClosing ? 'closing' : ''}`}
@@ -84,7 +94,7 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
                         type="text"
                         placeholder="Title of your note..."
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={handleTitleChange}
                         autoFocus
                     />
                 </div>
@@ -104,7 +114,7 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
                                 color={color}
                                 onClick={() => setSelectedColor(color)}
                                 style={{
-                                    border : selectedColor === color ? '1px solid black' : 'none',
+                                    border : selectedColor === color ? '2px solid #6b6868' : 'none',
                                     height: '25px',
                                     width: '25px'
                                 }}
@@ -124,8 +134,13 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
                 </div>
                 <div className="bottom-buttons">
                     <AddNoteModalButton onClick={onClose}>Cancel</AddNoteModalButton>
-                    <AddNoteModalButton onClick={handleSave} disabled={!title.trim()}>Save</AddNoteModalButton>
+                    <AddNoteModalButton onClick={handleSave}>Save</AddNoteModalButton>
                 </div>
+                {titleBlankError && (
+                    <div className="no-title-error">
+                        <p>Title can't be blank!</p>
+                    </div>
+                )}
             </div>
         </div>
     );
