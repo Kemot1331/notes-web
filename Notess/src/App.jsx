@@ -16,9 +16,17 @@ const dummyNotes = [
   const [notes, setNotes] = useState(dummyNotes);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState("#ffb3ba");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const pinnedNotes = notes.filter((note) => note.isPinned);
-  const otherNotes = notes.filter((note) => !note.isPinned);
+  const filterNotes = notes.filter(note => {
+  const lowerCaseQuery = searchQuery.trim().toLowerCase();
+  return(
+      note.title.toLowerCase().includes(lowerCaseQuery) || note.description.includes(lowerCaseQuery)
+    );
+  });
+
+  const pinnedNotes = filterNotes.filter((note) => note.isPinned);
+  const otherNotes = filterNotes.filter((note) => !note.isPinned);
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -42,8 +50,13 @@ const dummyNotes = [
     <div className="app-container">
      <Sidebar onColorSelect={handleColorSelect}/>
       <main>
-        <SearchBar />
+        <SearchBar 
+          value={searchQuery} onChange={setSearchQuery}
+        />
         <div className="main-title"><h1>Notes</h1></div>
+        {filterNotes.length === 0 && (
+          <p className='note-classification'>No notes match "{searchQuery}"</p>
+        )}
         {pinnedNotes.length > 0 && (
           <>
             <p className='note-classification'>Pinned</p>
