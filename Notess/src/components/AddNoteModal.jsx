@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import './AddNoteModal.css';
-import ColorDotButton from './ColorDotButton';
+import ColorDotButton from './ui/ColorDotButton';
 
 const AddNoteModalButton = ({ children, onClick }) => (
     <button className="add-note-modal-button" onClick={onClick}>{children}</button>

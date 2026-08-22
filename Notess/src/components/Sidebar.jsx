@@ -1,7 +1,7 @@
-import Button from './Button';
+import Button from './ui/Button';
 import './Sidebar.css';
 import { useState } from 'react';
-import ColorDotButton from './ColorDotButton';
+import ColorDotButton from './ui/ColorDotButton';
 
 export default function Sidebar({ onColorSelect }){
     const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
