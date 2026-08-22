@@ -1,6 +1,6 @@
 import Button from './Button';
 import "./NoteCard.css";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const PencilIcon = () => (
 <svg 
@@ -56,9 +56,23 @@ const PinIcon = () => (
 
 export default function NoteCard({title, description, color, isPinned, date}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const cardRef = useRef(null);
+
+    useEffect(() => {
+        if (!isMenuOpen) return;
+
+        const handleClickOutside = (e) => {
+            if (cardRef.current && !cardRef.current.contains(e.target)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isMenuOpen]);
 
     return(
-        <div className="note-card" style={{backgroundColor: color}}>
+        <div className="note-card" ref={cardRef} style={{backgroundColor: color}}>
             <div className="note-top-container">
                 <p className="note-title">{title}</p>
             </div>
