@@ -46,7 +46,7 @@ const dummyNotes = [
         <div className="main-title"><h1>Notes</h1></div>
         {pinnedNotes.length > 0 && (
           <>
-            <p>Pinned</p>
+            <p className='note-classification'>Pinned</p>
             <div className='notes-grid'>
               {pinnedNotes.map((pinnedNote) => (
                 <NoteCard
@@ -63,7 +63,7 @@ const dummyNotes = [
         )}
         {otherNotes.length > 0 && (
           <>
-            {pinnedNotes.length > 0 && <p>Other</p>}
+            {pinnedNotes.length > 0 && <p className='note-classification'>Other</p>}
             <div className="notes-grid">
               {otherNotes.map((note) => (
                 <NoteCard
