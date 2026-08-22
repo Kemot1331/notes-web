@@ -46,6 +46,7 @@ const dummyNotes = [
             <NoteCard
               key={note.id}
               title={note.title}
+              description={note.description}
               color={note.color}
               date={note.date}
               isPinned={note.isPinned}
