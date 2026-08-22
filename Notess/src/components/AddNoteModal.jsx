@@ -1,24 +1,38 @@
-import React, { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import './AddNoteModal.css';
 import ColorDotButton from './ColorDotButton';
-import { useState } from 'react';
-
-const AddNoteModalButton = ({ children, onClick }) => (
-    <button className="add-note-modal-button" onClick={onClick}>{children}</button>
+ 
+const AddNoteModalButton = ({ children, onClick, disabled }) => (
+    <button className="add-note-modal-button" onClick={onClick} disabled={disabled}>{children}</button>
 );
-
-export default function AddNoteModal({ isOpen,  onClose, initialColor, onSave }){
+ 
+const CLOSE_ANIMATION_MS = 200;
+ 
+export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
+    const [shouldRender, setShouldRender] = useState(isOpen);
+    const [isClosing, setIsClosing] = useState(false);
     const [selectedColor, setSelectedColor] = useState(initialColor || "#ffb3ba");
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [isPinned, setIsPinned] = useState(false);
+    const mouseDownOnOverlay = useRef(false);
+ 
 
     useEffect(() => {
-        if(isOpen){
+        if (isOpen) {
+            setShouldRender(true);
+            setIsClosing(false);
             setSelectedColor(initialColor || "#ffb3ba");
             setTitle('');
             setDescription('');
             setIsPinned(false);
+        } else if (shouldRender) {
+            setIsClosing(true);
+            const timeout = setTimeout(() => {
+                setShouldRender(false);
+                setIsClosing(false);
+            }, CLOSE_ANIMATION_MS);
+            return () => clearTimeout(timeout);
         }
     }, [isOpen, initialColor]);
 
@@ -30,13 +44,13 @@ export default function AddNoteModal({ isOpen,  onClose, initialColor, onSave })
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isOpen, onClose]);
-
-    if(!isOpen) return null;
-
+ 
+    if (!shouldRender) return null;
+ 
     const colors = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
-
+ 
     const handleSave = () => {
-        if(!title.trim()) return;
+        if (!title.trim()) return;
         onSave({
             title: title.trim(),
             description: description.trim(),
@@ -44,10 +58,27 @@ export default function AddNoteModal({ isOpen,  onClose, initialColor, onSave })
             isPinned,
         });
     };
-
+    const handleOverlayMouseDown = (e) => {
+        mouseDownOnOverlay.current = e.target === e.currentTarget;
+    };
+ 
+    const handleOverlayMouseUp = (e) => {
+        if (mouseDownOnOverlay.current && e.target === e.currentTarget) {
+            onClose();
+        }
+        mouseDownOnOverlay.current = false;
+    };
+ 
     return(
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ backgroundColor: selectedColor }}>
+        <div
+            className={`modal-overlay ${isClosing ? 'closing' : ''}`}
+            onMouseDown={handleOverlayMouseDown}
+            onMouseUp={handleOverlayMouseUp}
+        >
+            <div
+                className={`modal-content ${isClosing ? 'closing' : ''}`}
+                style={{ backgroundColor: selectedColor }}
+            >
                 <div className="title-container">
                     <input
                         type="text"
@@ -59,11 +90,11 @@ export default function AddNoteModal({ isOpen,  onClose, initialColor, onSave })
                 </div>
                 <div className="description-container">
                     <textarea
-                        placeholder="Take a note..." 
+                        placeholder="Take a note..."
                         rows={10}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        ></textarea>
+                    ></textarea>
                 </div>
                 <div className="switch-buttons-container">
                     <div className="color-dots-picker">
@@ -82,7 +113,7 @@ export default function AddNoteModal({ isOpen,  onClose, initialColor, onSave })
                     </div>
                     <div className="switch-container">
                         <label className="switch">
-                            <input 
+                            <input
                                 type="checkbox"
                                 checked={isPinned}
                                 onChange={(e) => setIsPinned(e.target.checked)}
@@ -93,7 +124,7 @@ export default function AddNoteModal({ isOpen,  onClose, initialColor, onSave })
                 </div>
                 <div className="bottom-buttons">
                     <AddNoteModalButton onClick={onClose}>Cancel</AddNoteModalButton>
-                    <AddNoteModalButton onClick={handleSave} disabled={!title.trim}>Save</AddNoteModalButton>
+                    <AddNoteModalButton onClick={handleSave} disabled={!title.trim()}>Save</AddNoteModalButton>
                 </div>
             </div>
         </div>

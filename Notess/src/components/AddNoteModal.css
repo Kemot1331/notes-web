@@ -160,3 +160,33 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes modalPopIn {
+  0% { opacity: 0; transform: translateY(15px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes modalPopOut {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(15px) scale(0.9); }
+}
+
+.modal-overlay {
+  animation: overlayFadeIn 0.2s ease forwards;
+}
+.modal-overlay.closing {
+  animation: overlayFadeOut 0.2s ease forwards;
+}
+
+.modal-content {
+  animation: modalPopIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.modal-content.closing {
+  animation: modalPopOut 0.2s ease-in forwards;
+}
