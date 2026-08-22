@@ -19,7 +19,10 @@ main{
 }
 .main-title > h1{
   font-size: 40px;
-  margin-left: 6.3vh;
+  margin-left: 3.2vw;
+}
+p{
+  margin-left: 3.2vw;
 }
 .notes-grid{
   margin-left: 3vw;
@@ -28,4 +31,5 @@ main{
   justify-content: start;
   gap: 1.5vw;
   flex-wrap: wrap;
+  margin-bottom: 6vh;
 }
