@@ -4,22 +4,16 @@ import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/Sidebar";
 import AddNoteModal from './components/AddNoteModal';
 import axios from 'axios';
+import { Oval } from 'react-loader-spinner';
 
 const API_URL = 'http://localhost:8080/api/notes';
 
 function App(){
-// const dummyNotes = [
-//     { id: 1, title: 'This is Docket note.', description: "Tymczasowa treść notatki...", color: '#ffb3ba', date: 'May 22, 2022', isPinned: false},
-//     { id: 2, title: 'The beginning of screenless design: UI jobs to be taken over by Solution Architect', description: "Tymczasowa treść notatki...", color: '#ffdfba', date: 'May 21, 2020', isPinned: false },
-//     { id: 3, title: '13 Things You Should Give Up If You Want To Be a Successful UX Designer', description: "Tymczasowa treść notatki...", color: '#ffffba', date: 'May 25, 2020', isPinned: false },
-//     { id: 4, title: '10 UI & UX Lessons from Designing My Own Product', description: "Tymczasowa treść notatki...", color: '#baffc9', date: 'May 22, 2022', isPinned: false },
-//     { id: 5, title: '52 Research Terms you need to know as a UX Designer', description: "Tymczasowa treść notatki...", color: '#bae1ff', isPinned: true},
-//   ];
-
   const [notes, setNotes] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState("#ffb3ba");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchNotes();
@@ -32,6 +26,9 @@ function App(){
       setNotes(response.data);
     } catch (error){
       console.error("Server error: ", error);
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
@@ -71,6 +68,21 @@ const filterNotes = notes.filter(note => {
 
   return(
     <div className="app-container">
+      {isLoading &&
+        <div className='loading'>
+          <p>Loading notes...</p>
+          <Oval
+          height={80}
+          width={80}
+          color="#000"
+          visible={true}
+          ariaLabel="oval-loading"
+          secondaryColor="#5a5e5a"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+          />
+        </div>
+      }
      <Sidebar onColorSelect={handleColorSelect}/>
       <main>
         <SearchBar 
