@@ -33,7 +33,7 @@ main{
   flex-wrap: wrap;
   margin-bottom: 6vh;
 }
-.loading{
+.handle-loading-and-error{
   width: 100%;
   height: 100%;
   position: absolute;
@@ -44,6 +44,6 @@ main{
   margin-left: auto;
   margin-right: auto;
 }
-.loading > p{
+.handle-loading-and-error > p{
   font-size: 24px;
 }

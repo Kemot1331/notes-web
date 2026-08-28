@@ -54,7 +54,7 @@ const PinIcon = () => (
   </svg>
 );
 
-export default function NoteCard({title, description, color, isPinned, date}){
+export default function NoteCard({title, description, color, isPinned, date, onDelete}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const cardRef = useRef(null);
 
@@ -85,6 +85,7 @@ export default function NoteCard({title, description, color, isPinned, date}){
                         <Button 
                             content={<TrashIcon />}
                             size={"5vh"}
+                            onClick={onDelete}
                         />
                         <Button 
                             content={<PinIcon />}

@@ -14,18 +14,22 @@ function App(){
   const [selectedColor, setSelectedColor] = useState("#ffb3ba");
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchNotes();
   }, []);
 
   const fetchNotes = async () => {
+    setIsLoading(true);
+    setError(null);
+
     try{
       const response = await axios.get(API_URL);
-      console.log(response.data);
       setNotes(response.data);
     } catch (error){
       console.error("Server error: ", error);
+      setError("Failed to connect to the server. Please try again later.")
     }
     finally{
       setIsLoading(false);
@@ -66,10 +70,20 @@ const filterNotes = notes.filter(note => {
     }
   }
 
+  const handleDeleteNote = async (id) => {
+    try{
+      await axios.delete(`${API_URL}/${id}`);
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+    } catch (error){
+      console.error("An error occurred while deleting a note: ", error);
+    }
+  }
+
   return(
     <div className="app-container">
-      {isLoading &&
-        <div className='loading'>
+      {/*1.loading notes */}
+      {isLoading && (
+        <div className='handle-loading-and-error'>
           <p>Loading notes...</p>
           <Oval
           height={80}
@@ -82,14 +96,28 @@ const filterNotes = notes.filter(note => {
           strokeWidthSecondary={2}
           />
         </div>
+        )
       }
+      {/*2.server error*/}
+      {error && (
+        <div className='handle-loading-and-error'>
+          <p style={{color: "#d9534f"}}>{error}</p>
+        </div>
+      )}
+      {/* 3.no notes in db */}
+      {!error && notes.length === 0 && isLoading == false && (
+        <div className='handle-loading-and-error'>
+          <p>No notes in the database. Click + to add the first one</p>
+        </div>
+      )}
+
      <Sidebar onColorSelect={handleColorSelect}/>
       <main>
         <SearchBar 
           value={searchQuery} onChange={setSearchQuery}
         />
         <div className="main-title"><h1>Notes</h1></div>
-        {filterNotes.length === 0 && (
+        {!error && notes.length > 0 && filterNotes.length === 0 && (
           <p className='note-classification'>No notes match "{searchQuery}"</p>
         )}
         {pinnedNotes.length > 0 && (
@@ -104,6 +132,7 @@ const filterNotes = notes.filter(note => {
                   color={pinnedNote.color}
                   date={pinnedNote.date}
                   isPinned={pinnedNote.isPinned}
+                  onDelete={() => handleDeleteNote(pinnedNote.id)}
                 />
               ))}
             </div>
@@ -121,6 +150,7 @@ const filterNotes = notes.filter(note => {
                   color={note.color}
                   date={note.date}
                   isPinned={note.isPinned}
+                  onDelete={() => handleDeleteNote(note.id)}
                 />
               ))}
             </div>
