@@ -54,7 +54,7 @@ const PinIcon = () => (
   </svg>
 );
 
-export default function NoteCard({title, description, color, isPinned, date, onDelete}){
+export default function NoteCard({title, description, color, isPinned, date, onDelete, onTogglePin}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const cardRef = useRef(null);
 
@@ -90,6 +90,7 @@ export default function NoteCard({title, description, color, isPinned, date, onD
                         <Button 
                             content={<PinIcon />}
                             size={"5vh"}
+                            onClick={onTogglePin}
                         />
                     </div>
                 </div>

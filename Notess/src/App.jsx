@@ -79,6 +79,22 @@ const filterNotes = notes.filter(note => {
     }
   }
 
+  const handleTogglePin = async (noteToToggle) => {
+    try{
+      const updatedNote = {
+        title: noteToToggle.title,
+        description: noteToToggle.description,
+        color: noteToToggle.color,
+        pinned: !noteToToggle.pinned
+      };
+
+      const response = await axios.put(`${API_URL}/${noteToToggle.id}`, updatedNote);
+
+      setNotes((prevNotes) => prevNotes.map((note) => note.id === noteToToggle.id ? response.data : note));
+    } catch (error){
+      console.error("An error occurred while toggling pin status: ", error);
+    }
+  }
   return(
     <div className="app-container">
       {/*1.loading notes */}
@@ -133,6 +149,7 @@ const filterNotes = notes.filter(note => {
                   date={pinnedNote.date}
                   isPinned={pinnedNote.isPinned}
                   onDelete={() => handleDeleteNote(pinnedNote.id)}
+                  onTogglePin={() => handleTogglePin(pinnedNote)}
                 />
               ))}
             </div>
@@ -151,6 +168,7 @@ const filterNotes = notes.filter(note => {
                   date={note.date}
                   isPinned={note.isPinned}
                   onDelete={() => handleDeleteNote(note.id)}
+                  onTogglePin={() => handleTogglePin(note)}
                 />
               ))}
             </div>
