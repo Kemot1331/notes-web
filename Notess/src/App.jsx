@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import AddNoteModal from './components/AddNoteModal';
 import axios from 'axios';
 import { Oval } from 'react-loader-spinner';
+import { ToastContainer, toast } from 'react-toastify';
 
 const API_URL = 'http://localhost:8080/api/notes';
 
@@ -15,6 +16,9 @@ function App(){
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const notify = () => toast(toastMessage);
 
   useEffect(() => {
     fetchNotes();
@@ -65,6 +69,8 @@ const filterNotes = notes.filter(note => {
 
       setNotes((prevNotes) => [response.data, ...prevNotes]);
       setModalOpen(false);
+      setToastMessage("Note added successfully!")
+      notify();
     } catch (error){
       console.log("An error corrupted after adding a note: ", error);
     }
@@ -129,6 +135,7 @@ const filterNotes = notes.filter(note => {
 
      <Sidebar onColorSelect={handleColorSelect}/>
       <main>
+        <button onClick={notify}>ttt</button>
         <SearchBar 
           value={searchQuery} onChange={setSearchQuery}
         />
@@ -174,6 +181,18 @@ const filterNotes = notes.filter(note => {
             </div>
           </>
         )}
+        <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
       </main>
       <AddNoteModal 
         isOpen={isModalOpen}
