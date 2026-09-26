@@ -16,9 +16,6 @@ function App(){
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [toastMessage, setToastMessage] = useState("");
-
-  const notify = () => toast(toastMessage);
 
   useEffect(() => {
     fetchNotes();
@@ -69,10 +66,11 @@ const filterNotes = notes.filter(note => {
 
       setNotes((prevNotes) => [response.data, ...prevNotes]);
       setModalOpen(false);
-      setToastMessage("Note added successfully!")
-      notify();
+
+      toast.success("Note added successfully!");
     } catch (error){
       console.log("An error corrupted after adding a note: ", error);
+      toast.error("Failed to add note.");
     }
   }
 
@@ -80,8 +78,10 @@ const filterNotes = notes.filter(note => {
     try{
       await axios.delete(`${API_URL}/${id}`);
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+      toast.success("Note deleted successfully!");
     } catch (error){
       console.error("An error occurred while deleting a note: ", error);
+      toast.error("Failed to delete a note.");
     }
   }
 
@@ -97,8 +97,10 @@ const filterNotes = notes.filter(note => {
       const response = await axios.put(`${API_URL}/${noteToToggle.id}`, updatedNote);
 
       setNotes((prevNotes) => prevNotes.map((note) => note.id === noteToToggle.id ? response.data : note));
+      toast.success("Note pinned successfully!")
     } catch (error){
       console.error("An error occurred while toggling pin status: ", error);
+      toast.error("Failed to pin a note.");
     }
   }
   return(
@@ -135,7 +137,6 @@ const filterNotes = notes.filter(note => {
 
      <Sidebar onColorSelect={handleColorSelect}/>
       <main>
-        <button onClick={notify}>ttt</button>
         <SearchBar 
           value={searchQuery} onChange={setSearchQuery}
         />
