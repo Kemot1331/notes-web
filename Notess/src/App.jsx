@@ -97,7 +97,12 @@ const filterNotes = notes.filter(note => {
       const response = await axios.put(`${API_URL}/${noteToToggle.id}`, updatedNote);
 
       setNotes((prevNotes) => prevNotes.map((note) => note.id === noteToToggle.id ? response.data : note));
-      toast.success("Note pinned successfully!")
+      if(updatedNote.pinned){
+        toast.success("Note pinned successfully!")
+      }
+      else{
+        toast.success("Note unpinned successfully!")
+      }
     } catch (error){
       console.error("An error occurred while toggling pin status: ", error);
       toast.error("Failed to pin a note.");
