@@ -155,6 +155,8 @@ const filterNotes = notes.filter(note => {
                   description={pinnedNote.description}
                   color={pinnedNote.color}
                   date={pinnedNote.date}
+                  createdAt={pinnedNote.createdAt}
+                  updatedAt={pinnedNote.updatedAt}
                   isPinned={pinnedNote.isPinned}
                   onDelete={() => handleDeleteNote(pinnedNote.id)}
                   onTogglePin={() => handleTogglePin(pinnedNote)}
@@ -173,7 +175,8 @@ const filterNotes = notes.filter(note => {
                   title={note.title}
                   description={note.description}
                   color={note.color}
-                  date={note.date}
+                  createdAt={note.createdAt}
+                  updatedAt={note.updatedAt}
                   isPinned={note.isPinned}
                   onDelete={() => handleDeleteNote(note.id)}
                   onTogglePin={() => handleTogglePin(note)}

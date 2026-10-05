@@ -54,9 +54,15 @@ const PinIcon = () => (
   </svg>
 );
 
-export default function NoteCard({title, description, color, isPinned, date, onDelete, onTogglePin}){
+const formatDate = (date) => {
+    return new Date(date).toLocaleDateString('pl-PL', {day: 'numeric', month: 'short', year: 'numeric'});
+}
+
+export default function NoteCard({title, description, color, isPinned, date, onDelete, onTogglePin, createdAt, updatedAt}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const cardRef = useRef(null);
+
+    const dateToShow = updatedAt || createdAt;
 
     useEffect(() => {
         if (!isMenuOpen) return;
@@ -78,7 +84,7 @@ export default function NoteCard({title, description, color, isPinned, date, onD
             </div>
             {description && <p className="note-description">{description}</p>}
             <div className="note-footer">
-                <span className="note-date">{date || "No date"}</span>
+                <span className="note-date">{dateToShow ? formatDate(dateToShow) : "No date"}</span>
 
                 {isMenuOpen && <div className="note-actions-wrapper">
                     <div className='action-menu'>
