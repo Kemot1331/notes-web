@@ -55,7 +55,7 @@ const PinIcon = () => (
 );
 
 const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('pl-PL', {day: 'numeric', month: 'short', year: 'numeric'});
+    return new Date(date).toLocaleDateString('en-EN', {day: 'numeric', month: 'short', year: 'numeric'});
 }
 
 export default function NoteCard({title, description, color, isPinned, date, onDelete, onTogglePin, createdAt, updatedAt}){
