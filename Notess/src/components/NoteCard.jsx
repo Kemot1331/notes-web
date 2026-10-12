@@ -58,9 +58,15 @@ const formatDate = (date) => {
     return new Date(date).toLocaleDateString('en-EN', {day: 'numeric', month: 'short', year: 'numeric'});
 }
 
-export default function NoteCard({title, description, color, isPinned, date, onDelete, onTogglePin, createdAt, updatedAt}){
+export default function NoteCard({title, description, color, isPinned, date, onOpen, onDelete, onTogglePin, createdAt, updatedAt}){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const cardRef = useRef(null);
+
+    // Buttons inside the card must not bubble up to the card's onClick (which opens the modal)
+    const stopAnd = (handler) => (e) => {
+        e.stopPropagation();
+        handler();
+    };
 
     const dateToShow = updatedAt || createdAt;
 
@@ -78,7 +84,7 @@ export default function NoteCard({title, description, color, isPinned, date, onD
     }, [isMenuOpen]);
 
     return(
-        <div className="note-card" ref={cardRef} style={{backgroundColor: color}}>
+        <div className="note-card" ref={cardRef} style={{backgroundColor: color}} onClick={onOpen}>
             <div className="note-top-container">
                 <p className="note-title">{title}</p>
             </div>
@@ -91,12 +97,12 @@ export default function NoteCard({title, description, color, isPinned, date, onD
                         <Button 
                             content={<TrashIcon />}
                             size={"5vh"}
-                            onClick={onDelete}
+                            onClick={stopAnd(onDelete)}
                         />
                         <Button 
                             content={<PinIcon />}
                             size={"5vh"}
-                            onClick={onTogglePin}
+                            onClick={stopAnd(onTogglePin)}
                         />
                     </div>
                 </div>
@@ -105,9 +111,7 @@ export default function NoteCard({title, description, color, isPinned, date, onD
                 <Button
                     content={<PencilIcon />}
                     size={"5vh"}
-                    onClick={() => {
-                        setIsMenuOpen(!isMenuOpen);
-                    }}
+                    onClick={stopAnd(() => setIsMenuOpen(!isMenuOpen))}
                 />
 
                 

@@ -49,7 +49,6 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
     if (!shouldRender) return null;
 
     const colors = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"];
-
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
         if (titleBlankError) setTitleBlankError(false);
@@ -80,6 +79,7 @@ export default function AddNoteModal({ isOpen, initialColor, onClose, onSave }){
     };
 
     return(
+
         <div
             className={`modal-overlay ${isClosing ? 'closing' : ''}`}
             onMouseDown={handleOverlayMouseDown}

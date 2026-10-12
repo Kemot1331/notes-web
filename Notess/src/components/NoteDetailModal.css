@@ -1,0 +1,22 @@
+.detail-modal{
+    width: min(520px, 92vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-color: rgba(0, 0, 0, 0.4) transparent;
+}
+.detail-modal > *{
+    flex-shrink: 0;
+}
+.detail-modal .title-container > input[type=text]{
+    width: 100%;
+    height: 7vh;
+}
+.note-meta{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 300;
+    color: #555;
+}
