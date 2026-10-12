@@ -3,6 +3,7 @@ import NoteCard from "./components/NoteCard";
 import SearchBar from "./components/SearchBar";
 import Sidebar from "./components/Sidebar";
 import AddNoteModal from './components/AddNoteModal';
+import NoteDetailModal from './components/NoteDetailModal';
 import axios from 'axios';
 import { Oval } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,6 +17,8 @@ function App(){
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [isDetailOpen, setDetailOpen] = useState(false);
 
   useEffect(() => {
     fetchNotes();
@@ -71,6 +74,32 @@ const filterNotes = notes.filter(note => {
     } catch (error){
       console.log("An error corrupted after adding a note: ", error);
       toast.error("Failed to add note.");
+    }
+  }
+
+  const handleOpenNote = (note) => {
+    setSelectedNote(note);
+    setDetailOpen(true);
+  }
+
+  const handleUpdateNote = async (id, {title, description, color, isPinned}) => {
+    try{
+      const updatedNote = {
+        title,
+        description,
+        color,
+        pinned: isPinned
+      };
+
+      const response = await axios.put(`${API_URL}/${id}`, updatedNote);
+
+      setNotes((prevNotes) => prevNotes.map((note) => note.id === id ? response.data : note));
+      setDetailOpen(false);
+
+      toast.success("Note updated successfully!");
+    } catch (error){
+      console.error("An error occurred while updating a note: ", error);
+      toast.error("Failed to update the note.");
     }
   }
 
@@ -158,6 +187,7 @@ const filterNotes = notes.filter(note => {
                   createdAt={pinnedNote.createdAt}
                   updatedAt={pinnedNote.updatedAt}
                   isPinned={pinnedNote.isPinned}
+                  onOpen={() => handleOpenNote(pinnedNote)}
                   onDelete={() => handleDeleteNote(pinnedNote.id)}
                   onTogglePin={() => handleTogglePin(pinnedNote)}
                 />
@@ -178,6 +208,7 @@ const filterNotes = notes.filter(note => {
                   createdAt={note.createdAt}
                   updatedAt={note.updatedAt}
                   isPinned={note.isPinned}
+                  onOpen={() => handleOpenNote(note)}
                   onDelete={() => handleDeleteNote(note.id)}
                   onTogglePin={() => handleTogglePin(note)}
                 />
@@ -203,6 +234,12 @@ const filterNotes = notes.filter(note => {
         onClose={() => setModalOpen(false)}
         initialColor={selectedColor}
         onSave={handleAddNote}
+      />
+      <NoteDetailModal
+        isOpen={isDetailOpen}
+        note={selectedNote}
+        onClose={() => setDetailOpen(false)}
+        onSave={handleUpdateNote}
       />
     </div>
   )
