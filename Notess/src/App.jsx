@@ -20,25 +20,27 @@ function App(){
   const [selectedNote, setSelectedNote] = useState(null);
   const [isDetailOpen, setDetailOpen] = useState(false);
 
+
+
   useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        setError(null);
+        const response = await axios.get(API_URL);
+        setNotes(response.data);
+      } catch (error) {
+        console.error("Server error: ", error);
+        setError("Failed to connect to the server. Please try again later.");
+
+        setTimeout(() => {
+          fetchNotes();
+        }, 5000);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     fetchNotes();
   }, []);
-
-  const fetchNotes = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try{
-      const response = await axios.get(API_URL);
-      setNotes(response.data);
-    } catch (error){
-      console.error("Server error: ", error);
-      setError("Failed to connect to the server. Please try again later.")
-    }
-    finally{
-      setIsLoading(false);
-    }
-  };
 
 const filterNotes = notes.filter(note => {
     const lowerCaseQuery = searchQuery.trim().toLowerCase();
