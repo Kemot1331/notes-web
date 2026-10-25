@@ -7,6 +7,8 @@ import NoteDetailModal from './components/NoteDetailModal';
 import axios from 'axios';
 import { Oval } from 'react-loader-spinner';
 import { ToastContainer, toast } from 'react-toastify';
+import { loginUser } from './authApi';
+import LoginPage from './components/LoginPage';
 
 const API_URL = 'http://localhost:8080/api/notes';
 
@@ -20,27 +22,44 @@ function App(){
   const [selectedNote, setSelectedNote] = useState(null);
   const [isDetailOpen, setDetailOpen] = useState(false);
 
-
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") !== null);
 
   useEffect(() => {
     const fetchNotes = async () => {
+      if(!isLoggedIn){
+        return;
+      }
       try {
-        setError(null);
         const response = await axios.get(API_URL);
         setNotes(response.data);
+        setError(null);
       } catch (error) {
         console.error("Server error: ", error);
         setError("Failed to connect to the server. Please try again later.");
 
         setTimeout(() => {
           fetchNotes();
-        }, 5000);
+        }, 10000000000);
       } finally {
         setIsLoading(false);
       }
     };
     fetchNotes();
-  }, []);
+  }, [isLoggedIn]);
+
+  const loginButton = async () => {
+    // const username = "admin";
+    const email = "testowo@test.pl";
+    const password = "test123";
+    try{
+    const response = await loginUser(email, password);
+    localStorage.setItem("token", response.token);
+    setIsLoggedIn(true);
+    }
+    catch (error){
+      console.error(error);
+    }
+  }
 
 const filterNotes = notes.filter(note => {
     const lowerCaseQuery = searchQuery.trim().toLowerCase();
@@ -139,6 +158,12 @@ const filterNotes = notes.filter(note => {
       toast.error("Failed to pin a note.");
     }
   }
+
+  if(!isLoggedIn){
+    return(
+      <LoginPage />
+    )
+  }
   return(
     <div className="app-container">
       {/*1.loading notes */}
@@ -162,10 +187,11 @@ const filterNotes = notes.filter(note => {
       {error && (
         <div className='handle-loading-and-error'>
           <p style={{color: "#d9534f"}}>{error}</p>
+          <button onClick={loginButton}>Zaloguj admina(test)</button>
         </div>
       )}
       {/* 3.no notes in db */}
-      {!error && notes.length === 0 && isLoading == false && (
+      {!error && notes.length === 0 && isLoading === false && (
         <div className='handle-loading-and-error'>
           <p>No notes in the database. Click + to add the first one</p>
         </div>

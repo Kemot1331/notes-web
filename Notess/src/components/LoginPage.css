@@ -1,0 +1,60 @@
+.top-bar{
+    width: 100%;
+}
+
+.login-container{
+    display: flex;
+    min-width: 100%;
+    flex-direction: column;
+}
+.login-container > .logo{
+    font-size: 20px;
+}
+.login-card-container{
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-card{
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    margin: 15px;
+    min-height: 47vh;
+    min-width: 25vw;
+    padding: 2vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-color: #ffb3ba;
+}
+.login-text{
+    margin-bottom: 2%;
+    font-weight: 500;
+    font-size: 18px;
+}
+.login-card > input[type="email"], .login-card > input[type="password"]{
+    padding: 4%;
+    background-color: #fedde5;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+.login-card > input::placeholder{
+    font-weight: 500;
+}
+.sign-in-button{
+    margin-top: 20%;
+    padding: 3%;
+    border: none;
+    outline: none;
+    background-color: #1a1b1a;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+}
+.login-text > a{
+    color: #1a1b1a;
+}
