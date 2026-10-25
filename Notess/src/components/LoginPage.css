@@ -58,3 +58,34 @@
 .login-text > a{
     color: #1a1b1a;
 }
+.sign-in-button {
+    margin-top: 20%;
+    padding: 3%;
+    border: none;
+    outline: none;
+    background-color: #1a1b1a;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                transform 0.15s ease,
+                box-shadow 0.2s ease;
+}
+
+.sign-in-button:hover {
+    background-color: #333533;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
+}
+.sign-in-button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.sign-in-button:focus-visible {
+    outline: 2px solid #1a1b1a;
+    outline-offset: 3px;
+}

@@ -161,7 +161,7 @@ const filterNotes = notes.filter(note => {
 
   if(!isLoggedIn){
     return(
-      <LoginPage />
+      <LoginPage onLoginSuccess={() => setIsLoggedIn(true)}/>
     )
   }
   return(

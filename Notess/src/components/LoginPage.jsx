@@ -1,9 +1,22 @@
 import "./LoginPage.css";
+import { loginUser } from "../authApi";
 import { useState } from "react";
 
-export default function LoginPage() {
+export default function LoginPage( {onLoginSuccess} ) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const handleLoginUser = async (e) => {
+        e.preventDefault();
+        try{
+            const response = await loginUser(email, password);
+            localStorage.setItem("token", response.token);
+            onLoginSuccess();
+        }
+        catch (ex){
+            console.error(ex);
+        }
+    };
 
     return (
         <div className="login-container">
@@ -19,13 +32,14 @@ export default function LoginPage() {
                     }}>Sign in to your notes</div>
             </div>
                 <div className="login-card-container">
-                    <form className="login-card" method="post">
-                        <label for="email" className="login-text">Email address</label>
-                        <input type="email" name="email" id="123" style={{marginBottom: "3vh"}}
-                        placeholder="you@example.com"/>
+                    <form className="login-card" onSubmit={handleLoginUser}>
+                        <label htmlFor="email" className="login-text">Email address</label>
+                        <input type="email" name="email" id="email" style={{marginBottom: "3vh"}}
+                        placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)}/>
 
-                        <label for="password" className="login-text">Password</label>
-                        <input type="password" name="password" id="123" placeholder="Enter your password"/>
+                        <label htmlFor="password" className="login-text">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Enter your password"
+                        value={password} onChange={(e) => setPassword(e.target.value)}/>
 
                         <button className="sign-in-button">Sign in</button>
                         <div className="login-text" style={{textAlign: "center", fontSize: "14px", marginTop: "5vh"}}>
