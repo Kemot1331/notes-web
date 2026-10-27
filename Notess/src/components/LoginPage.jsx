@@ -5,16 +5,19 @@ import { useState } from "react";
 export default function LoginPage( {onLoginSuccess} ) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loginError, setLoginError] = useState(null);
 
     const handleLoginUser = async (e) => {
         e.preventDefault();
+        setLoginError(null);
         try{
             const response = await loginUser(email, password);
             localStorage.setItem("token", response.token);
             onLoginSuccess();
         }
-        catch (ex){
-            console.error(ex);
+        catch (error){
+            setLoginError(error.response.data.message);
+            console.error(loginError);
         }
     };
 
@@ -40,6 +43,13 @@ export default function LoginPage( {onLoginSuccess} ) {
                         <label htmlFor="password" className="login-text">Password</label>
                         <input type="password" name="password" id="password" placeholder="Enter your password"
                         value={password} onChange={(e) => setPassword(e.target.value)}/>
+
+                        {loginError && (
+                            <div className="login-error">
+                                <p>{loginError}</p>
+                            </div>
+                            )
+                        }
 
                         <button className="sign-in-button">Sign in</button>
                         <div className="login-text" style={{textAlign: "center", fontSize: "14px", marginTop: "5vh"}}>

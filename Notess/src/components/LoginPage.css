@@ -23,7 +23,7 @@
     border-radius: 20px;
     margin: 15px;
     min-height: 47vh;
-    min-width: 25vw;
+    min-width: 30vw;
     padding: 2vw;
     padding-top: 5vh;
     padding-bottom: 5vh;
@@ -59,7 +59,7 @@
     color: #1a1b1a;
 }
 .sign-in-button {
-    margin-top: 20%;
+    margin-top: 3%;
     padding: 3%;
     border: none;
     outline: none;
@@ -88,4 +88,8 @@
 .sign-in-button:focus-visible {
     outline: 2px solid #1a1b1a;
     outline-offset: 3px;
+}
+.login-error{
+    color: #f04242;
+    text-align: center;
 }
